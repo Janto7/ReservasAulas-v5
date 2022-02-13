@@ -1,6 +1,6 @@
 # Tarea Reservas de Aulas
-## Profesor: Andrés Rubio del Río
-## Alumno:
+## Profesor: Francisco Enrique Balsalobre Salinas
+## Alumno:	José Antonio Del Rey Martínez
 
 Desde el IES Al-Ándalus nos comentan que debemos tener en cuenta los siguientes aspectos:
 
