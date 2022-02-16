@@ -58,7 +58,7 @@ public class Aula {
 	}
 
 	public static Aula getAulaFicticia(String nombre) {
-		return new Aula(nombre, 10);
+		return new Aula(nombre, 7);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class Aula {
 
 	@Override
 	public String toString() {
-		return String.format("nombre=%s, puestos=%d", nombre, puestos);
+		return "nombre=" + nombre + ", puestos=" + puestos;
 	}
 
 }

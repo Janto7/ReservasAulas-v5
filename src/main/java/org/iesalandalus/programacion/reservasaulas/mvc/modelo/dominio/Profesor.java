@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 public class Profesor {
 
-	private static final String ER_TELEFONO = "(9|6)[0-9]{8}";
+	private static final String ER_TELEFONO = "(6|9)[0-9]{8}";
 	private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
 
 	private String nombre;
@@ -122,8 +122,8 @@ public class Profesor {
 
 	@Override
 	public String toString() {
-		String cadenaTelefono = (getTelefono() == null) ? "" : ", teléfono=" + telefono;
-		return String.format("nombre=%s, correo=%s%s", nombre, correo, cadenaTelefono);
+		String cadenaTelefono = (getTelefono() == null) ? "" : ", teléfono=" + getTelefono();
+		return "nombre=" + getNombre() + ", correo=" + getCorreo() + cadenaTelefono;
 	}
 
 }
