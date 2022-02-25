@@ -11,23 +11,18 @@ public class Reserva {
 	private Permanencia permanencia;
 
 	public Reserva(Profesor profesor, Aula aula, Permanencia permanencia) {
-
 		setProfesor(profesor);
 		setAula(aula);
 		setPermanencia(permanencia);
 	}
 
-	public Reserva(Reserva reserva) {
-		if (reserva == null) {
+	public Reserva(Reserva r) {
+		if (r == null) {
 			throw new NullPointerException("ERROR: No se puede copiar una reserva nula.");
 		}
-		setProfesor(reserva.getProfesor());
-		setAula(reserva.getAula());
-		setPermanencia(reserva.getPermanencia());
-	}
-
-	public Profesor getProfesor() {
-		return new Profesor(profesor);
+		setProfesor(r.getProfesor());
+		setAula(r.getAula());
+		setPermanencia(r.getPermanencia());
 	}
 
 	private void setProfesor(Profesor profesor) {
@@ -37,8 +32,8 @@ public class Reserva {
 		this.profesor = new Profesor(profesor);
 	}
 
-	public Aula getAula() {
-		return new Aula(aula);
+	public Profesor getProfesor() {
+		return profesor;
 	}
 
 	private void setAula(Aula aula) {
@@ -48,51 +43,60 @@ public class Reserva {
 		this.aula = new Aula(aula);
 	}
 
-	public Permanencia getPermanencia() {
-		return permanencia;
+	public Aula getAula() {
+		return aula;
 	}
 
-	// El operador instanceof nos permite comprobar si un objeto es de una clase
-	// concreta.
 	private void setPermanencia(Permanencia permanencia) {
 		if (permanencia == null) {
 			throw new NullPointerException("ERROR: La reserva se debe hacer para una permanencia concreta.");
 		}
-
+		// Con el operador instanceof comprobamos de que clase concreta es cada objeto
 		if (permanencia instanceof PermanenciaPorTramo) {
 			this.permanencia = new PermanenciaPorTramo((PermanenciaPorTramo) permanencia);
-		} else {
+		} else if (permanencia instanceof PermanenciaPorHora) {
 			this.permanencia = new PermanenciaPorHora((PermanenciaPorHora) permanencia);
 		}
 	}
 
-	public static Reserva getReservaFicticia(Aula aula, Permanencia permanencia) {
-		return new Reserva(Profesor.getProfesorFicticio("janto@gmail.com"), aula, permanencia);
+	public Permanencia getPermanencia() {
+
+		return permanencia;
 	}
 
+	/*
+	 * A través de un aula y de una permanencia recibidas como parámetros, obtenemos
+	 * un profesor ficticio y nos devuelve una reserva.
+	 */
+	public static Reserva getReservaFicticia(Aula aula, Permanencia permanencia) {
+		return new Reserva(Profesor.getProfesorFicticio("Janto@gmail.com"), aula, permanencia);
+	}
+
+	// Devolvemos el número de puntos de la permanencia más el número de puntos del
+	// aula.
 	public float getPuntos() {
 		return permanencia.getPuntos() + aula.getPuntos();
 	}
 
+	// Dos reservas seran iguales si tienen el misma aula y la misma permanencia.
 	@Override
 	public int hashCode() {
-		return Objects.hash(permanencia);
+		return Objects.hash(aula, permanencia);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Reserva))
 			return false;
 		Reserva other = (Reserva) obj;
-		return Objects.equals(permanencia, other.permanencia);
+		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia);
 	}
 
 	@Override
 	public String toString() {
 		return String.format("%s, %s, %s, puntos=%.1f", profesor, aula, permanencia, getPuntos());
 	}
+
 }

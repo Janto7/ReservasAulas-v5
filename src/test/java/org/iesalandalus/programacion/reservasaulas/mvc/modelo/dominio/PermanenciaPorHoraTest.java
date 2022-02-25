@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
@@ -9,10 +9,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.Test;
-*/
+
 
 public class PermanenciaPorHoraTest {
-/*	
+
 	private static final String ERROR_DIA_NULO = "ERROR: El día de una permanencia no puede ser nulo.";
 	private static final String ERROR_HORA_NULA = "ERROR: La hora de una permanencia no puede ser nula.";
 	private static final String ERROR_HORA_NO_VALIDA = "ERROR: La hora de una permanencia no es válida.";
@@ -133,5 +133,5 @@ public class PermanenciaPorHoraTest {
 		PermanenciaPorHora permanencia = new PermanenciaPorHora(DIA1, HORA1);
 		assertThat(CADENA_NO_ESPERADA, permanencia.toString(), is(String.format("día=%s, hora=%s", DIA1.format(Permanencia.FORMATO_DIA), HORA1.format(PermanenciaPorHora.FORMATO_HORA))));
 	}
-*/
+
 }

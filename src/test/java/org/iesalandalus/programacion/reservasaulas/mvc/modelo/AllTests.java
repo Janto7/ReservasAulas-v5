@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo;
 
-/*
+
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.AulaTest;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHoraTest;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.ProfesorTest;
@@ -18,4 +18,4 @@ import org.junit.runners.Suite.SuiteClasses;
 	ProfesoresTest.class, AulasTest.class, ReservasTest.class })
 public class AllTests {
 
-}*/
+}

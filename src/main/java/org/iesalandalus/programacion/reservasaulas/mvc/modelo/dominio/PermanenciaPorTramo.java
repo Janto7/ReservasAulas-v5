@@ -15,9 +15,9 @@ public class PermanenciaPorTramo extends Permanencia {
 		setTramo(tramo);
 	}
 
-	public PermanenciaPorTramo(PermanenciaPorTramo p) {
-		super(p);
-		setTramo(p.getTramo());
+	public PermanenciaPorTramo(PermanenciaPorTramo permanenciaPorTramo) {
+		super(permanenciaPorTramo);
+		setTramo(permanenciaPorTramo.getTramo());
 	}
 
 	public Tramo getTramo() {
@@ -38,19 +38,17 @@ public class PermanenciaPorTramo extends Permanencia {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(tramo);
+		return Objects.hash(getDia(), tramo);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof PermanenciaPorTramo))
 			return false;
 		PermanenciaPorTramo other = (PermanenciaPorTramo) obj;
-		return tramo == other.tramo;
+		return Objects.equals(getDia(), other.getDia()) && tramo == other.tramo;
 	}
 
 	@Override

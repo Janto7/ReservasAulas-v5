@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -17,9 +17,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Aulas;
 import org.junit.BeforeClass;
 import org.junit.Test;
-*/
+
 public class AulasTest {
-/*
+
 	private static final String ERROR_INSERTAR_AULA_NULA = "ERROR: No se puede insertar un aula nula.";
 	private static final String ERROR_BORRAR_AULA_NULA = "ERROR: No se puede borrar un aula nula.";
 	private static final String ERROR_BUSCAR_AULA_NULA = "ERROR: No se puede buscar un aula nula.";
@@ -302,5 +302,5 @@ public class AulasTest {
 			fail(TIPO_NO_CORRECTO);
 		}
 	}
-*/
+
 }

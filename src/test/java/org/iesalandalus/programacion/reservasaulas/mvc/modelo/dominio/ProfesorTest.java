@@ -1,13 +1,13 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-*/
+
 public class ProfesorTest {
-/*	
+
 	private static final String ERROR_NOMBRE_NULO = "ERROR: El nombre del profesor no puede ser nulo.";
 	private static final String ERROR_NOMBRE_NO_VALIDO = "ERROR: El nombre del profesor no puede estar vacío.";
 	private static final String ERROR_CORREO_NULO = "ERROR: El correo del profesor no puede ser nulo.";
@@ -401,5 +401,5 @@ public class ProfesorTest {
 		profesor = new Profesor(NOMBRE_ARDR, CORREO_ARDR, TELEFONO_ARDR);
 		assertThat(CADENA_NO_ESPERADA, profesor.toString(), is(String.format("nombre=%s, correo=%s, teléfono=%s", NOMBRE_ARDR, CORREO_ARDR, TELEFONO_ARDR)));
 	}
-*/
+
 }

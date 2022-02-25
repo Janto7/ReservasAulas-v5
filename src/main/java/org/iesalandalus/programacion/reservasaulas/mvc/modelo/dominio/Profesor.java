@@ -23,13 +23,13 @@ public class Profesor {
 		setTelefono(telefono);
 	}
 
-	public Profesor(Profesor profesor) {
-		if (profesor == null) {
+	public Profesor(Profesor p) {
+		if (p == null) {
 			throw new NullPointerException("ERROR: No se puede copiar un profesor nulo.");
 		}
-		setNombre(profesor.getNombre());
-		setCorreo(profesor.getCorreo());
-		setTelefono(profesor.getTelefono());
+		setNombre(p.getNombre());
+		setCorreo(p.getCorreo());
+		setTelefono(p.getTelefono());
 	}
 
 	private void setNombre(String nombre) {
@@ -39,6 +39,7 @@ public class Profesor {
 		if (nombre.trim().equals("")) {
 			throw new IllegalArgumentException("ERROR: El nombre del profesor no puede estar vacío.");
 		}
+		// Utilizamos el método formateaNombre para establecer el nombre
 		this.nombre = formateaNombre(nombre);
 	}
 
@@ -97,12 +98,12 @@ public class Profesor {
 		return telefono;
 	}
 
+	// Devuelve un profesor ficticio de un correo pasado por parámetro
 	public static Profesor getProfesorFicticio(String correo) {
 		return new Profesor("José Antonio Del Rey Martínez", correo);
 	}
 
 	// Dos profesores serán iguales si tienen el mismo correo
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(correo);
@@ -112,9 +113,7 @@ public class Profesor {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Profesor))
 			return false;
 		Profesor other = (Profesor) obj;
 		return Objects.equals(correo, other.correo);
@@ -122,7 +121,7 @@ public class Profesor {
 
 	@Override
 	public String toString() {
-		String cadenaTelefono = (getTelefono() == null) ? "" : ", teléfono=" + getTelefono();
+		String cadenaTelefono = (telefono == null) ? "" : ", teléfono=" + telefono;
 		return "nombre=" + getNombre() + ", correo=" + getCorreo() + cadenaTelefono;
 	}
 

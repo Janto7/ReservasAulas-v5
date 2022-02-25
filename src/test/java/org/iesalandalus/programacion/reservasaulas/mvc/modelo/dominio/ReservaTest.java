@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -12,10 +12,10 @@ import java.time.LocalTime;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-*/
+
 
 public class ReservaTest {
-/*	
+
 	private static final String ERROR_PROFESOR_NULO = "ERROR: La reserva debe estar a nombre de un profesor.";
 	private static final String ERROR_AULA_NULA = "ERROR: La reserva debe ser para un aula concreta.";
 	private static final String ERROR_PERMANENCIA_NULA = "ERROR: La reserva se debe hacer para una permanencia concreta.";
@@ -200,5 +200,5 @@ public class ReservaTest {
 		reserva = new Reserva(profesor, aula, permanenciaHora);
 		assertThat(CADENA_NO_ESPERADA, reserva.toString(), is(String.format("%s, %s, %s, puntos=%.1f", profesor, aula, permanenciaHora, 18.0)));
 	}
-*/
+
 }

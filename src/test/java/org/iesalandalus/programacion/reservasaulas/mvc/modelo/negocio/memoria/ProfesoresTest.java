@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -16,9 +16,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IProfesore
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Profesores;
 import org.junit.BeforeClass;
 import org.junit.Test;
-*/
+
 public class ProfesoresTest {
-/*
+
 	private static final String ERROR_INSERTAR_PROFESOR_NULO = "ERROR: No se puede insertar un profesor nulo.";
 	private static final String ERROR_BORRAR_PROFESOR_NULO = "ERROR: No se puede borrar un profesor nulo.";
 	private static final String ERROR_BUSCAR_PROFESOR_NULO = "ERROR: No se puede buscar un profesor nulo.";
@@ -301,5 +301,5 @@ public class ProfesoresTest {
 			fail(TIPO_NO_CORRECTO);
 		}
 	}
-*/
+
 }

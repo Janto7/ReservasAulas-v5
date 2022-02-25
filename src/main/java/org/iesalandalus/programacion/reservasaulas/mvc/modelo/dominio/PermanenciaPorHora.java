@@ -20,9 +20,9 @@ public class PermanenciaPorHora extends Permanencia {
 		setHora(hora);
 	}
 
-	public PermanenciaPorHora(PermanenciaPorHora p) {
-		super(p);
-		setHora(p.getHora());
+	public PermanenciaPorHora(PermanenciaPorHora permanenciaPorHora) {
+		super(permanenciaPorHora);
+		setHora(permanenciaPorHora.getHora());
 	}
 
 	public LocalTime getHora() {
@@ -48,19 +48,19 @@ public class PermanenciaPorHora extends Permanencia {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(hora);
+		return Objects.hash(getDia(), hora);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof PermanenciaPorHora)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		PermanenciaPorHora other = (PermanenciaPorHora) obj;
-		return Objects.equals(hora, other.hora);
+		return Objects.equals(getDia(), other.getDia()) && Objects.equals(hora, other.hora);
 	}
 
 	@Override

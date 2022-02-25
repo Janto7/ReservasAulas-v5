@@ -1,15 +1,15 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-*/
+
 public class AulaTest {
-/*	
+
 	private static final String ERROR_NOMBRE_NULO = "ERROR: El nombre del aula no puede ser nulo.";
 	private static final String ERROR_NOMBRE_NO_VALIDO = "ERROR: El nombre del aula no puede estar vacío.";
 	private static final String ERROR_PUESTOS_NO_VALIDOS = "ERROR: El número de puestos no es correcto.";
@@ -129,5 +129,5 @@ public class AulaTest {
 		assertThat(CADENA_NO_ESPERADA, aula1.toString(), is(String.format("nombre=%s, puestos=%d", NOMBRE_AULA1, NUM_PUESTOS1)));
 		assertThat(CADENA_NO_ESPERADA, aula2.toString(), is(String.format("nombre=%s, puestos=%d", NOMBRE_AULA2, NUM_PUESTOS2)));
 	}
-*/
+
 }

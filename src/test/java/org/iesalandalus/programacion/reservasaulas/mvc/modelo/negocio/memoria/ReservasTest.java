@@ -1,19 +1,16 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
 
-/*
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
 import javax.naming.OperationNotSupportedException;
-
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.PermanenciaPorHora;
@@ -25,10 +22,10 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria.Reservas;
 import org.junit.BeforeClass;
 import org.junit.Test;
-*/
+
 
 public class ReservasTest {
-/*
+
 	private static final String ERROR_INSERTAR_RESERVA_NULA = "ERROR: No se puede insertar una reserva nula.";
 	private static final String ERROR_BORRAR_RESERVA_NULA = "ERROR: No se puede borrar una reserva nula.";
 	private static final String ERROR_BUSCAR_RESERVA_NULA = "ERROR: No se puede buscar una reserva nula.";
@@ -241,7 +238,6 @@ public class ReservasTest {
 			fail(TIPO_NO_CORRECTO);
 		}
 	}
-
 	
 	@Test
 	public void insertarReservaValidaConReservasVaciasInsertaReservaCorrectamente() {
@@ -662,5 +658,5 @@ public class ReservasTest {
 			fail(TIPO_NO_CORRECTO);
 		}
 	}
-*/
+
 }
