@@ -17,10 +17,16 @@ public class MainApp {
 
 	public static void main(String[] args) {
 		// Nos devuelve un IFuenteDatos del tipo memoria.
+
 		IModelo modelo = new Modelo(FactoriaFuenteDatos.MEMORIA.crear());
 		IVista vista = new Vista();
 		IControlador controlador = new Controlador(modelo, vista);
-		controlador.comenzar();
+		// Capturamos las posibles excepciones del controlador.
+		try {
+			controlador.comenzar();
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

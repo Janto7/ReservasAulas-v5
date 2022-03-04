@@ -61,11 +61,21 @@ public class Vista implements IVista {
 	public void borrarAula() {
 		Consola.mostrarCabecera("Borrar Aula");
 		try {
-			controlador.borrarAula(Consola.leerAulaFicticia());
-			System.out.println("Aula borrada correctamente.");
+
+			Aula aula = Consola.leerAulaFicticia();
 			/*
-			 * Capturamos las excepciones de la clase Aula y las del método borrar.
+			 * No tiene sentido permitir borrar un aula que tiene asignada una o varias
+			 * reservas, primero habria que borrar la reserva, y después el aula.
 			 */
+			List<Reserva> reservas = controlador.getReservasAula(aula);
+			if (reservas.size() > 0) {
+				System.out.println("No se puede borrar un aula con reservas asociadas.");
+			} else {
+
+				controlador.borrarAula(aula);
+				System.out.println("Aula borrada correctamente.");
+			}
+
 		} catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -124,11 +134,23 @@ public class Vista implements IVista {
 	public void borrarProfesor() {
 		Consola.mostrarCabecera("Borrar Profesor");
 		try {
-			controlador.borrarProfesor(Consola.leerProfesorFicticio());
-			System.out.println("Profesor borrado correctamente.");
+
+			Profesor profesor = Consola.leerProfesorFicticio();
+
 			/*
-			 * Capturamos las excepciones de la clase Profesor y las del método insertar.
+			 * No tiene sentido permitir borrar un profesor que tiene asignada una o varias
+			 * reservas, primero habria que borrar la reserva, y después el profesor.
 			 */
+
+			List<Reserva> reservas = controlador.getReservasProfesor(profesor);
+			if (reservas.size() > 0) {
+				System.out.println("No se puede borrar un profesor con reservas asociadas.");
+
+			} else {
+				controlador.borrarProfesor(profesor);
+				System.out.println("Profesor borrado correctamente.");
+			}
+
 		} catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
@@ -171,126 +193,33 @@ public class Vista implements IVista {
 	@Override
 	public void realizarReserva() {
 
-		Consola.mostrarCabecera("Realizar Reserva");
-
-		Reserva reserva = null;
-		Profesor profesorConTelefono = null;
-		Profesor profesorSinTelefono = null;
-
-		List<String> profesores = controlador.representarProfesores();
-		List<String> aulas = controlador.representarAulas();
-		String datosProfesores = null;
-		String datosAulas = null;
-		String datosProfesor = null;
-		String nombreProfesor = null;
-
-		String telefonoProfesor = null;
-
-		boolean aulaRegistrada = false;
-		boolean profesorRegistrado = false;
-		boolean telefonoRegistrado = false;
-
 		try {
+			Profesor profesor = Consola.leerProfesorFicticio();
+			Profesor profesorRegistrado = controlador.buscarProfesor(profesor);
 
-			reserva = Consola.leerReserva();
+			if (profesorRegistrado != null) {
 
-			for (Iterator<String> it = profesores.iterator(); it.hasNext();) {
-				datosProfesores = it.next();
+				Aula aula = Consola.leerAulaFicticia();
+				Aula aulaRegistrada = controlador.buscarAula(aula);
 
-				/*
-				 * Comparo el correo introducido por teclado, con el toString de profesores,
-				 * valiendome de los métodos indexof(), que me extraen la cadena exacta necesito
-				 * comparar.
-				 */
-				if (datosProfesores.contains(reserva.getProfesor().getCorreo())) {
-					profesorRegistrado = true;
-					datosProfesor = datosProfesores;
+				if (aulaRegistrada != null) {
 
-					/*
-					 * Obtengo el nombre del profesor valiendome de los métodos indexOf() y
-					 * lastIndexOf(), que me extraen la cadena exacta del nombre del profesor, y lo
-					 * utilizamos para reemplazar el nombre del profesor ficticio, pues el enunciado
-					 * nos indica el meétodo leerReserva() debe devolver la reserva a partir de un
-					 * profesor ficticio, pero de esa forma siempre obtenemos el mismo nombre al
-					 * listar reservas.
-					 *
-					 */
-					nombreProfesor = reserva.getProfesor().getNombre().replace("José Antonio Del Rey Martínez",
-							datosProfesor.substring(datosProfesor.indexOf('=') + 1, datosProfesor.indexOf(',')));
+					Permanencia permanencia = Consola.leerPermanencia();
+					Reserva reserva = new Reserva(profesorRegistrado, aulaRegistrada, permanencia);
 
-				}
+					controlador.realizarReserva(reserva);
 
-			}
-
-			if (datosProfesor != null) {
-
-				if (datosProfesor.contains("teléfono=")) {
-					telefonoRegistrado = true;
-
-				}
-
-				if (telefonoRegistrado) {
-
-					/*
-					 * Obtengo el teléfono del profesor valiendome del método lastIndexOf, que me
-					 * extraen la cadena exacta del telefono del profesor.
-					 *
-					 */
-
-					telefonoProfesor = datosProfesor.substring(datosProfesor.lastIndexOf('=') + 1);
-					/*
-					 * Si el profesor tiene un teléfono asignado usamos el constructor
-					 * Profesor(nombre, correo, teléfono).
-					 */
-					profesorConTelefono = new Profesor(nombreProfesor, reserva.getProfesor().getCorreo(),
-							telefonoProfesor);
-
-					reserva = new Reserva(profesorConTelefono, reserva.getAula(), reserva.getPermanencia());
-
+					System.out.println("Reserva realizada correctamente.\n" + NOMBRE_VALIDO + "\n" + CORREO_VALIDO);
 				} else {
-					/*
-					 * Si el profesor no tiene un teléfono asignado usamos el constructor
-					 * Profesor(nombre, correo).
-					 */
-
-					profesorSinTelefono = new Profesor(nombreProfesor, reserva.getProfesor().getCorreo());
-					reserva = new Reserva(profesorSinTelefono, reserva.getAula(), reserva.getPermanencia());
-
+					System.out.println(ERROR + "El aula " + aula.getNombre() + ", no está registrada en el sistema.");
 				}
-			}
-
-			/*
-			 * Repito el mismo proceso para validar el aula existe en el sistema, esta vez
-			 * valiendome del método replace() para quedarme con la cadena deseada.
-			 */
-			for (Iterator<String> it = aulas.iterator(); it.hasNext();) {
-				datosAulas = it.next();
-				if (reserva.getAula().getNombre().equalsIgnoreCase(
-						datosAulas.substring(datosAulas.indexOf('=') + 1, datosAulas.lastIndexOf(',')))) {
-					aulaRegistrada = true;
-
-				}
-			}
-
-			if (!profesorRegistrado) {
-
-				System.out.println(ERROR + "No se ha podido encontrar el profesor en el sistema.");
-			}
-
-			if (!aulaRegistrada) {
-				System.out.println(ERROR + "No se ha podido encontrar el aula en el sistema.");
-
-			} else if (profesorRegistrado && aulaRegistrada) {
-
-				controlador.realizarReserva(reserva);
-				System.out.println("Reserva realizada correctamente.\n" + NOMBRE_VALIDO + "\n" + CORREO_VALIDO);
-
+			} else {
+				System.out.println(ERROR + "El correo " + profesor.getCorreo() + ", no está registrado en el sistema.");
 			}
 
 		} catch (OperationNotSupportedException | IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
-
 	}
 
 	@Override
@@ -358,50 +287,30 @@ public class Vista implements IVista {
 	@Override
 	public void consultarDisponibilidad() {
 
-		Consola.mostrarCabecera("Consultar Disponibilidad");
-		Aula nombreAula;
-		String nombresAulas;
-		List<String> aulas = controlador.representarAulas();
-
-		boolean aulaRegistrada = false;
-
 		try {
+			Aula aula = Consola.leerAulaFicticia();
+			Aula aulaRegistrada = controlador.buscarAula(aula);
 
-			nombreAula = Consola.leerAulaFicticia();
+			if (aulaRegistrada != null) {
 
-			for (Iterator<String> it = aulas.iterator(); it.hasNext();) {
-				nombresAulas = it.next();
-				/*
-				 * Comparo el nombre del aula este registrado en el sistema, utilizo el método
-				 * replace para conseguir la cadena deseada.
-				 */
-				if (nombreAula.getNombre().equalsIgnoreCase(
-						nombresAulas.substring(nombresAulas.indexOf('=') + 1, nombresAulas.lastIndexOf(',')))) {
-					aulaRegistrada = true;
+				Permanencia permanencia = Consola.leerPermanencia();
 
-					Aula aulaAConsultar = new Aula(nombreAula);
+				if (controlador.consultarDisponibilidad(aula, permanencia)) {
+					System.out
+							.println("Disponible el aula " + aula.getNombre() + ", para la permanencia " + permanencia);
 
-					Permanencia permanencia = Consola.leerPermanencia();
-
-					if (controlador.consultarDisponibilidad(aulaAConsultar, permanencia) == true) {
-						System.out.println("Disponible el aula " + nombreAula + " para la permanencia " + permanencia);
-					} else {
-						System.out
-								.println("No Disponible el aula " + nombreAula + " para la permanencia " + permanencia);
-					}
-
+				} else {
+					System.out.println(
+							"No disponible el aula " + aula.getNombre() + ", para la permanencia " + permanencia);
 				}
+			} else {
+				System.out.println(ERROR + "El aula " + aula.getNombre() + " no está registrada en el sistema.");
 			}
-
-			if (!aulaRegistrada) {
-				System.out.println(ERROR + "No está registrada el aula " + nombreAula + " en el sistema.");
-
-			}
-
-		} catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e) {
+		} catch (NullPointerException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 
 		}
 
 	}
+
 }

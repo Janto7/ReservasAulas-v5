@@ -236,13 +236,16 @@ public class Reservas implements IReservas {
 		if (reserva == null) {
 			throw new NullPointerException("ERROR: No se puede buscar una reserva nula.");
 		}
-		// Si la colección contiene la reserva
-		if (coleccionReservas.contains(reserva)) {
-			// La retornamos
-			return new Reserva(reserva);
-
-		} else {
+		/*
+		 * Devuelve el índice de la primera aparición del elemento especificado en esta
+		 * lista.
+		 */
+		int indice = coleccionReservas.indexOf(reserva);
+		// Devuelve -1 si el elemento especificado no está presente en esta lista.
+		if (indice == -1) {
 			return null;
+		} else {
+			return new Reserva(coleccionReservas.get(indice));
 		}
 	}
 
@@ -383,7 +386,7 @@ public class Reservas implements IReservas {
 	}
 
 	@Override
-	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) throws OperationNotSupportedException {
+	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 
 		boolean disponible = true;
 
@@ -399,23 +402,10 @@ public class Reservas implements IReservas {
 
 			Reserva reserva = it.next();
 
-			/*
-			 * Estuve viendo el video de Andres, y el aquí no aplica polimorfismo, pero si
-			 * quiero consultar la disponibilidad, debo tener en cuenta que si se ha elegido
-			 * un tipo de permanencia para un día, en ningún caso puede estar disponible un
-			 * aula para otro tipo de permanencia. Compruebo la permamencia no sea del mismo
-			 * tipo, y propago la excepción.
-			 */
-
 			if (reserva.getPermanencia() instanceof PermanenciaPorTramo && permanencia instanceof PermanenciaPorHora
-					&& reserva.getAula().equals(aula)) {
-				throw new OperationNotSupportedException(
-						"ERROR: Ya se ha realizado una reserva de otro tipo de permanencia para este día.");
-			} else if (reserva.getPermanencia() instanceof PermanenciaPorHora
-					&& permanencia instanceof PermanenciaPorTramo && reserva.getAula().equals(aula)) {
-				throw new OperationNotSupportedException(
-						"ERROR: Ya se ha realizado una reserva de otro tipo de permanencia para este día.");
-
+					&& reserva.getAula().equals(aula)
+					&& reserva.getPermanencia().getDia().equals(permanencia.getDia())) {
+				disponible = false;
 			}
 
 			else if (reserva.getPermanencia() instanceof PermanenciaPorTramo
@@ -428,7 +418,6 @@ public class Reservas implements IReservas {
 					&& reserva.getAula().equals(aula) && reserva.getPermanencia().equals(permanencia)) {
 				disponible = false;
 			}
-
 		}
 
 		return disponible;

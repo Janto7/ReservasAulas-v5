@@ -159,7 +159,7 @@ public class Modelo implements IModelo {
 	}
 
 	@Override
-	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) throws OperationNotSupportedException {
+	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 
 		return reservas.consultarDisponibilidad(aula, permanencia);
 	}

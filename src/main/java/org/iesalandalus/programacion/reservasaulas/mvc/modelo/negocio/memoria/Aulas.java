@@ -78,12 +78,16 @@ public class Aulas implements IAulas {
 		if (aula == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un aula nula.");
 		}
-		// Si la colección contiene el aula
-		if (coleccionAulas.contains(aula)) {
-			// La retornamos
-			return new Aula(aula);
-		} else {
+		/*
+		 * Devuelve el índice de la primera aparición del elemento especificado en esta
+		 * lista.
+		 */
+		int indice = coleccionAulas.indexOf(aula);
+		// Devuelve -1 si el elemento especificado no está presente en esta lista.
+		if (indice == -1) {
 			return null;
+		} else {
+			return new Aula(coleccionAulas.get(indice));
 		}
 	}
 

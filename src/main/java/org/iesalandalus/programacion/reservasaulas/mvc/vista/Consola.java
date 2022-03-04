@@ -148,7 +148,7 @@ public class Consola {
 	public static int elegirPermanencia() {
 		int ordinalPermanencia;
 		do {
-			System.out.print("\nElige una permanencia (0.- Por Tamo, 1.- Por Hora): ");
+			System.out.print("\nElige una permanencia (0.- Por Tramo, 1.- Por Hora): ");
 			ordinalPermanencia = Entrada.entero();
 		} while (ordinalPermanencia < 0 || ordinalPermanencia > 1);
 		return ordinalPermanencia;

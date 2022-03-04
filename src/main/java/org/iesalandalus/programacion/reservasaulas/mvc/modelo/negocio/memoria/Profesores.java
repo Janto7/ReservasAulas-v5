@@ -78,13 +78,16 @@ public class Profesores implements IProfesores {
 		if (profesor == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un profesor nulo.");
 		}
-		// Si la colección contiene el profesor
-		if (coleccionProfesores.contains(profesor)) {
-			// La retornamos
-			return new Profesor(profesor);
-
-		} else {
+		/*
+		 * Devuelve el índice de la primera aparición del elemento especificado en esta
+		 * lista.
+		 */
+		int indice = coleccionProfesores.indexOf(profesor);
+		// Devuelve -1 si el elemento especificado no está presente en esta lista.
+		if (indice == -1) {
 			return null;
+		} else {
+			return new Profesor(coleccionProfesores.get(indice));
 		}
 	}
 

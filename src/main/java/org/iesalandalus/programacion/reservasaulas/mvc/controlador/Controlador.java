@@ -110,7 +110,7 @@ public class Controlador implements IControlador {
 	}
 
 	@Override
-	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) throws OperationNotSupportedException {
+	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 		return modelo.consultarDisponibilidad(aula, permanencia);
 	}
 }
