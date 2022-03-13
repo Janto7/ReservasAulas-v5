@@ -31,42 +31,44 @@ public class Controlador implements IControlador {
 
 	@Override
 	public void comenzar() {
+		modelo.comenzar();
 		vista.comenzar();
 	}
 
 	@Override
 	public void terminar() {
-		System.out.println("Hasta luego!!!");
+		modelo.terminar();
+		System.out.println("Hasta luego Lucas!!!");
 	}
 
 	@Override
 	public void insertarAula(Aula aula) throws OperationNotSupportedException {
-		modelo.insertar(aula);
+		modelo.insertarAula(aula);
 	}
 
 	@Override
 	public void insertarProfesor(Profesor profesor) throws OperationNotSupportedException {
-		modelo.insertar(profesor);
+		modelo.insertarProfesor(profesor);
 	}
 
 	@Override
 	public void borrarAula(Aula aula) throws OperationNotSupportedException {
-		modelo.borrar(aula);
+		modelo.borrarAula(aula);
 	}
 
 	@Override
 	public void borrarProfesor(Profesor profesor) throws OperationNotSupportedException {
-		modelo.borrar(profesor);
+		modelo.borrarProfesor(profesor);
 	}
 
 	@Override
 	public Aula buscarAula(Aula aula) {
-		return modelo.buscar(aula);
+		return modelo.buscarAula(aula);
 	}
 
 	@Override
 	public Profesor buscarProfesor(Profesor profesor) {
-		return modelo.buscar(profesor);
+		return modelo.buscarProfesor(profesor);
 	}
 
 	@Override

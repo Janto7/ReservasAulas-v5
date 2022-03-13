@@ -11,6 +11,10 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 
 public interface IReservas {
 
+	void comenzar();
+
+	void terminar();
+
 	List<Reserva> getReservas();
 
 	int getNumReservas();

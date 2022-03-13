@@ -22,6 +22,7 @@ public class Consola {
 	}
 
 	public static void mostrarMenu() {
+		System.out.println();
 		for (Opcion opcion : Opcion.values()) {
 			System.out.println(opcion);
 		}
@@ -114,16 +115,21 @@ public class Consola {
 	public static LocalDate leerDia() {
 
 		LocalDate dia = null;
+		do {
+			System.out.printf("Introduza una fecha(dd/MM/yyyy):");
+			String fechaStr = Entrada.cadena();
 
-		System.out.printf("Introduza una fecha(dd/MM/yyyy):");
-		String fechaStr = Entrada.cadena();
-		try {
-			dia = LocalDate.parse(fechaStr, FORMATO_DIA);
-		} catch (DateTimeParseException e) {
-			System.out.println("ERROR: El formato de la fecha no es correcto. Formato correcto (dd/MM/yyyy)");
-		}
+			try {
+				dia = LocalDate.parse(fechaStr, FORMATO_DIA);
+			} catch (DateTimeParseException e) {
+				System.out.println("ERROR: El formato de la fecha no es correcto. Formato correcto (dd/MM/yyyy)");
+				dia = null;
+			}
+
+		} while (dia == null);
 
 		return dia;
+
 	}
 
 	/*
@@ -158,13 +164,18 @@ public class Consola {
 		LocalTime hora = null;
 		String formato = "HH:mm";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern(formato);
-		System.out.printf("Introduce la hora (%s): ", formato);
-		String horaStr = Entrada.cadena();
-		try {
-			hora = LocalTime.parse(horaStr, dtf);
-		} catch (DateTimeParseException e) {
-			System.out.println("ERROR: El formato de la hora no es correcto.");
-		}
+		do {
+			System.out.printf("Introduce la hora (%s): ", formato);
+			String horaStr = Entrada.cadena();
+			try {
+				hora = LocalTime.parse(horaStr, dtf);
+			} catch (DateTimeParseException e) {
+				System.out.println("ERROR: El formato de la hora no es correcto.");
+				hora = null;
+			}
+
+		} while (hora == null);
+
 		return hora;
 	}
 

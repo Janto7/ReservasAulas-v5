@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.vista;
 
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
@@ -12,7 +13,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 public class Vista implements IVista {
 
 	private static final String ERROR = "ERROR: ";
-	private static final String NOMBRE_VALIDO = "Nombre válido, el profesor está registrado en el sistema.";
+	private static final String NOMBRE_VALIDO = "Nombre válido, el nombre está registrado en el sistema.";
 	private static final String CORREO_VALIDO = "Correo válido, el correo está registrado en el sistema.";
 
 	private IControlador controlador;
@@ -43,7 +44,6 @@ public class Vista implements IVista {
 		controlador.terminar();
 	}
 
-	@Override
 	public void insertarAula() {
 		Consola.mostrarCabecera("Insertar Aula");
 		try {
@@ -57,19 +57,27 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void borrarAula() {
 		Consola.mostrarCabecera("Borrar Aula");
+		Reserva reserva = null;
+
 		try {
 
 			Aula aula = Consola.leerAulaFicticia();
 			/*
 			 * No tiene sentido permitir borrar un aula que tiene asignada una o varias
-			 * reservas, primero habria que borrar la reserva, y después el aula.
+			 * reservas, primero habria que borrar la reserva, y después el aula. Si debemos
+			 * permitir borrar aquellas aulas aún teniendo reservas asociadas en el registro
+			 * del sistema, sean reservas ya se hayan consumado, y poder tener un registro
+			 * de ellas.
 			 */
 			List<Reserva> reservas = controlador.getReservasAula(aula);
-			if (reservas.size() > 0) {
-				System.out.println("No se puede borrar un aula con reservas asociadas.");
+			for (Iterator<Reserva> it = reservas.iterator(); it.hasNext();) {
+				reserva = it.next();
+			}
+
+			if (reservas.size() > 0 && reserva.getPermanencia().getDia().isAfter(LocalDate.now())) {
+				System.out.println("No se puede borrar un aula con reservas en curso.");
 			} else {
 
 				controlador.borrarAula(aula);
@@ -81,7 +89,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void buscarAula() {
 		Consola.mostrarCabecera("Buscar Aula");
 		Aula aula;
@@ -97,7 +104,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void listarAulas() {
 
 		Consola.mostrarCabecera("Listado de Aulas");
@@ -111,12 +117,11 @@ public class Vista implements IVista {
 			}
 
 		} else {
-			System.out.println(ERROR + "No hay aulas que listar.Debe insertar primero un aula en el sistema.");
+			System.out.println(ERROR + "No hay aulas que listar. Debe insertar primero un aula en el sistema.");
 		}
 
 	}
 
-	@Override
 	public void insertarProfesor() {
 		Consola.mostrarCabecera("Insertar Profesor");
 		try {
@@ -130,23 +135,28 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void borrarProfesor() {
 		Consola.mostrarCabecera("Borrar Profesor");
+		Reserva reserva = null;
 		try {
 
 			Profesor profesor = Consola.leerProfesorFicticio();
-
 			/*
 			 * No tiene sentido permitir borrar un profesor que tiene asignada una o varias
-			 * reservas, primero habria que borrar la reserva, y después el profesor.
+			 * reservas, primero habria que borrar la reserva, y después el profesor. Si
+			 * debemos permitir borrar aquellos profesores aún teniendo reservas asociadas
+			 * en el registro del sistema, sean reservas ya se hayan consumado, y poder
+			 * tener un registro de ellas.
 			 */
-
 			List<Reserva> reservas = controlador.getReservasProfesor(profesor);
-			if (reservas.size() > 0) {
-				System.out.println("No se puede borrar un profesor con reservas asociadas.");
+			for (Iterator<Reserva> it = reservas.iterator(); it.hasNext();) {
+				reserva = it.next();
+			}
 
+			if (reservas.size() > 0 && reserva.getPermanencia().getDia().isAfter(LocalDate.now())) {
+				System.out.println("No se puede borrar un profesor con reservas en curso.");
 			} else {
+
 				controlador.borrarProfesor(profesor);
 				System.out.println("Profesor borrado correctamente.");
 			}
@@ -156,7 +166,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void buscarProfesor() {
 		Consola.mostrarCabecera("Buscar Profesor");
 		Profesor profesor;
@@ -173,7 +182,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void listarProfesores() {
 		Consola.mostrarCabecera("Listado de Profesores");
 
@@ -190,8 +198,9 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void realizarReserva() {
+
+		Consola.mostrarCabecera("Realizar Reserva");
 
 		try {
 			Profesor profesor = Consola.leerProfesorFicticio();
@@ -222,7 +231,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void anularReserva() {
 
 		Consola.mostrarCabecera("Anular Reserva");
@@ -237,7 +245,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void listarReservas() {
 
 		Consola.mostrarCabecera("Listado de Reservas");
@@ -254,7 +261,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void listarReservasAula() {
 		Consola.mostrarCabecera("Listado de Reservas por Aula");
 		List<Reserva> reservas = controlador.getReservasAula(Consola.leerAulaFicticia());
@@ -269,7 +275,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void listarReservasProfesor() {
 		Consola.mostrarCabecera("Listado de Reservas por Profesor");
 		List<Reserva> reservas = controlador.getReservasProfesor(Consola.leerProfesorFicticio());
@@ -284,7 +289,6 @@ public class Vista implements IVista {
 		}
 	}
 
-	@Override
 	public void consultarDisponibilidad() {
 
 		try {

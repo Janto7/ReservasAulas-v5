@@ -1,8 +1,9 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Reserva {
+public class Reserva implements Serializable {
 	// -----> profesor (0,1)
 	private Profesor profesor;
 	// -----> aula (0,1)

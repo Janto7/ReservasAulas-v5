@@ -1,5 +1,13 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -11,6 +19,8 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IAulas;
 
 public class Aulas implements IAulas {
+	// Fichero aulas
+	private static final String NOMBRE_FICHERO_AULAS = "datos/aulas.dat";
 	// -----> coleccionAulas (0...*)
 	private List<Aula> coleccionAulas;
 
@@ -24,12 +34,54 @@ public class Aulas implements IAulas {
 
 	@Override
 	public void comenzar() {
+		leer();
+	}
 
+	private void leer() {
+		File ficheroAulas = new File(NOMBRE_FICHERO_AULAS);
+		// Indicamos que se trata de un flujo de entrada para leer objetos
+		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficheroAulas))) {
+			Aula aula = null;
+			do {
+				// Casting
+				aula = (Aula) entrada.readObject();
+				insertar(aula);
+			} while (aula != null);
+			// Cerramos el flujo
+			entrada.close();
+		} catch (ClassNotFoundException e) {
+			System.out.println("No puedo encontrar la clase que tengo que leer.");
+		} catch (FileNotFoundException e) {
+			System.out.println("No puedo abrir el fihero de aulas.");
+		} catch (EOFException e) {
+			System.out.println("Fichero aulas leído satisfactoriamente.");
+		} catch (IOException e) {
+			System.out.println("Error inesperado de Entrada/Salida.");
+		} catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public void terminar() {
+		escribir();
+	}
 
+	private void escribir() {
+		File ficheroAulas = new File(NOMBRE_FICHERO_AULAS);
+		// Indicamos que se trata de un flujo de salida para escribir objetos
+		try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficheroAulas))) {
+			for (Aula aula : coleccionAulas) {
+				salida.writeObject(aula);
+			}
+			System.out.println("Fichero aulas escrito satisfactoriamente.");
+			// Cerramos el flujo
+			salida.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No puedo crear el fichero de aulas.");
+		} catch (IOException e) {
+			System.out.println("Error inesperado de Entrada/Salida.");
+		}
 	}
 
 	private void setAulas(IAulas aulas) {

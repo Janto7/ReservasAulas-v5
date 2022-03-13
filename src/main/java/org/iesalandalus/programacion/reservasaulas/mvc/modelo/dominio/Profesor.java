@@ -1,11 +1,12 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
-public class Profesor {
+public class Profesor implements Serializable {
 
-	private static final String ER_TELEFONO = "(6|9)[0-9]{8}";
+	private static final String ER_TELEFONO = "(6|9|7)[0-9]{8}";
 	private static final String ER_CORREO = "\\w+(?:\\.\\w+)*@\\w+\\.\\w{2,5}";
 
 	private String nombre;

@@ -25,6 +25,20 @@ public class Modelo implements IModelo {
 		aulas = fuenteDatos.crearAulas();
 		reservas = fuenteDatos.crearReservas();
 	}
+	
+	@Override
+	public void comenzar() {
+		aulas.comenzar();
+		profesores.comenzar();
+		reservas.comenzar();
+	}
+
+	@Override
+	public void terminar() {
+		aulas.terminar();
+		profesores.terminar();
+		reservas.terminar();
+	}
 
 	@Override
 	public List<Aula> getAulas() {
@@ -46,19 +60,19 @@ public class Modelo implements IModelo {
 	}
 
 	@Override
-	public Aula buscar(Aula aula) {
+	public Aula buscarAula(Aula aula) {
 
 		return aulas.buscar(aula);
 	}
 
 	@Override
-	public void insertar(Aula aula) throws OperationNotSupportedException {
+	public void insertarAula(Aula aula) throws OperationNotSupportedException {
 
 		aulas.insertar(aula);
 	}
 
 	@Override
-	public void borrar(Aula aula) throws OperationNotSupportedException {
+	public void borrarAula(Aula aula) throws OperationNotSupportedException {
 
 		aulas.borrar(aula);
 	}
@@ -83,19 +97,19 @@ public class Modelo implements IModelo {
 	}
 
 	@Override
-	public Profesor buscar(Profesor profesor) {
+	public Profesor buscarProfesor(Profesor profesor) {
 
 		return profesores.buscar(profesor);
 	}
 
 	@Override
-	public void insertar(Profesor profesor) throws OperationNotSupportedException {
+	public void insertarProfesor(Profesor profesor) throws OperationNotSupportedException {
 
 		profesores.insertar(profesor);
 	}
 
 	@Override
-	public void borrar(Profesor profesor) throws OperationNotSupportedException {
+	public void borrarProfesor(Profesor profesor) throws OperationNotSupportedException {
 
 		profesores.borrar(profesor);
 	}
@@ -120,7 +134,7 @@ public class Modelo implements IModelo {
 	}
 
 	@Override
-	public Reserva buscar(Reserva reserva) {
+	public Reserva buscarReserva(Reserva reserva) {
 
 		return reservas.buscar(reserva);
 	}

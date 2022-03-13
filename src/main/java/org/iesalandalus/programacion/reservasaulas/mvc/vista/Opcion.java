@@ -92,7 +92,7 @@ public enum Opcion {
 	};
 
 	private String mensajeAMostrar;
-	private static IVista vista;
+	private static Vista vista;
 
 	private Opcion(String mensaje) {
 		this.mensajeAMostrar = mensaje;
@@ -105,7 +105,7 @@ public enum Opcion {
 
 	public abstract void ejecutar();
 
-	protected static void setVista(IVista vista) {
+	protected static void setVista(Vista vista) {
 		Opcion.vista = vista;
 	}
 

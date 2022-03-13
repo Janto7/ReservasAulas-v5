@@ -11,22 +11,25 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.Vista;
 /*
  * @Author: José Antonio Del Rey Martínez, IES AL-ÁNDALUS, ALMERÍA
  * GitHub: Janto7
- * Tarea Online 6
+ * Tarea Online 8
  */
 public class MainApp {
 
 	public static void main(String[] args) {
-		// Nos devuelve un IFuenteDatos del tipo memoria.
 
-		IModelo modelo = new Modelo(FactoriaFuenteDatos.MEMORIA.crear());
+		IModelo modelo = null;
+
+		for (String argumento : args) {
+			if (argumento.equalsIgnoreCase("-fdficheros")) {
+				modelo = new Modelo(FactoriaFuenteDatos.FICHEROS.crear());
+			} else if (argumento.equalsIgnoreCase("-fdmemoria")) {
+				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA.crear());
+
+			}
+		}
 		IVista vista = new Vista();
 		IControlador controlador = new Controlador(modelo, vista);
-		// Capturamos las posibles excepciones del controlador.
-		try {
-			controlador.comenzar();
-		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+		controlador.comenzar();
 
+	}
 }

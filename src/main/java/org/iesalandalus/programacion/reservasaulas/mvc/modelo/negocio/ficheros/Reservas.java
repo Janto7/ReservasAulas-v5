@@ -1,5 +1,13 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.memoria;
+package org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.ficheros;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -20,6 +28,8 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.negocio.IReservas;
 public class Reservas implements IReservas {
 
 	private static final float MAX_PUNTOS_PROFESOR_MES = 200.0f;
+	private static final String NOMBRE_FICHERO_RESERVAS = "datos/reservas.dat";
+
 	// -----> coleccionReservas (0...*)
 	private List<Reserva> coleccionReservas;
 
@@ -33,12 +43,54 @@ public class Reservas implements IReservas {
 
 	@Override
 	public void comenzar() {
+		leer();
+	}
 
+	private void leer() {
+		File ficheroAulas = new File(NOMBRE_FICHERO_RESERVAS);
+		// Indicamos que se trata de un flujo de entrada para leer objetos
+		try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(ficheroAulas))) {
+			Reserva reserva = null;
+			do {
+				// Casting
+				reserva = (Reserva) entrada.readObject();
+				insertar(reserva);
+			} while (reserva != null);
+			// Cerramos el flujo
+			entrada.close();
+		} catch (ClassNotFoundException e) {
+			System.out.println("No puedo encontrar la clase que tengo que leer.");
+		} catch (FileNotFoundException e) {
+			System.out.println("No puedo abrir el fihero de reservas.");
+		} catch (EOFException e) {
+			System.out.println("Fichero reservas leído satisfactoriamente.");
+		} catch (IOException e) {
+			System.out.println("Error inesperado de Entrada/Salida.");
+		} catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public void terminar() {
+		escribir();
+	}
 
+	private void escribir() {
+		File ficheroAulas = new File(NOMBRE_FICHERO_RESERVAS);
+		// Indicamos que se trata de un flujo de salida para escribir objetos
+		try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ficheroAulas))) {
+			for (Reserva reserva : coleccionReservas) {
+				salida.writeObject(reserva);
+			}
+			System.out.println("Fichero reservas escrito satisfactoriamente.");
+			// Cerramos el flujo
+			salida.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("No puedo crear el fichero de reservas.");
+		} catch (IOException e) {
+			System.out.println("Error inesperado de Entrada/Salida.");
+		}
 	}
 
 	private void setReservas(IReservas reservas) {
@@ -143,10 +195,12 @@ public class Reservas implements IReservas {
 		}
 		// Validamos antes de insertar la nueva reserva a la colección no sea del mismo
 		// mes
+
 		if (!esMesSiguienteOPosterior(reserva)) {
 			throw new OperationNotSupportedException(
 					"ERROR: Sólo se pueden hacer reservas para el mes que viene o posteriores.");
 		}
+
 		// Comprobamos no se hayan sobrepasado los puntos de la reserva
 		if (getPuntosGastadosReserva(reserva) > MAX_PUNTOS_PROFESOR_MES) {
 			throw new OperationNotSupportedException(
@@ -273,6 +327,7 @@ public class Reservas implements IReservas {
 			throw new OperationNotSupportedException(
 					"ERROR: Sólo se pueden anular reservas para el mes que viene o posteriores.");
 		}
+
 		int indice = coleccionReservas.indexOf(reserva);
 		if (indice == -1) {
 			throw new OperationNotSupportedException("ERROR: No existe ninguna reserva igual.");
