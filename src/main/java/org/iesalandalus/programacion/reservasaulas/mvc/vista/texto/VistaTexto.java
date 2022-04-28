@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.vista;
+package org.iesalandalus.programacion.reservasaulas.mvc.vista.texto;
 
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -9,8 +9,9 @@ import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
+import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 
-public class Vista implements IVista {
+public class VistaTexto implements IVista {
 
 	private static final String ERROR = "ERROR: ";
 	private static final String NOMBRE_VALIDO = "Nombre válido, el nombre está registrado en el sistema.";
@@ -18,7 +19,7 @@ public class Vista implements IVista {
 
 	private IControlador controlador;
 
-	public Vista() {
+	public VistaTexto() {
 		Opcion.setVista(this);
 	}
 

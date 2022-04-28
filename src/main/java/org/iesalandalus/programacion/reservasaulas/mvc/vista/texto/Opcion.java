@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.mvc.vista;
+package org.iesalandalus.programacion.reservasaulas.mvc.vista.texto;
 
 public enum Opcion {
 	SALIR("Salir") {
@@ -92,7 +92,7 @@ public enum Opcion {
 	};
 
 	private String mensajeAMostrar;
-	private static Vista vista;
+	private static VistaTexto vista;
 
 	private Opcion(String mensaje) {
 		this.mensajeAMostrar = mensaje;
@@ -105,7 +105,7 @@ public enum Opcion {
 
 	public abstract void ejecutar();
 
-	protected static void setVista(Vista vista) {
+	protected static void setVista(VistaTexto vista) {
 		Opcion.vista = vista;
 	}
 
