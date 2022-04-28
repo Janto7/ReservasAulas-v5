@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="301.0" prefWidth="381.0" spacing="20.0" styleClass="vboxListarAulas" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.mvc.vista.grafica.controladoresvistas.ControladorListarAulas">
+   <children>
+      <Label fx:id="lbAulas" style="-fx-font-size: 35;" text="Aulas" wrapText="true">
+         <effect>
+            <Blend />
+         </effect></Label>
+      <TableView fx:id="tvAulas" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="tcNombre" prefWidth="230.0" text="Nombre" />
+          <TableColumn fx:id="tcPuestos" prefWidth="127.0" text="Puestos" />
+        </columns>
+      </TableView>
+      <Button fx:id="btAceptar" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
