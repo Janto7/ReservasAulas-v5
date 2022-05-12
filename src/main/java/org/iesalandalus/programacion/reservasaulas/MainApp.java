@@ -12,7 +12,7 @@ import org.iesalandalus.programacion.reservasaulas.mvc.vista.IVista;
 /*
  * @Author: José Antonio Del Rey Martínez, IES AL-ÁNDALUS, ALMERÍA
  * GitHub: Janto7
- * Tarea Online 9
+ * Tarea Online 10
  */
 public class MainApp {
 
