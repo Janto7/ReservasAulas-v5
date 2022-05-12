@@ -2,28 +2,33 @@
 ## Profesor: Paula Delgado Garcia
 ## Alumno: José Antonio Del Rey Martínez
 
-Desde el IES Al-Ándalus nos acaban de dar unos nuevos requisitos a aplicar sobre la última versión que le mostramos y que les gustó bastante. Lo que nos piden es lo siguiente:
+El cliente nos acaba de dar unos nuevos requisitos a aplicar sobre la última versión que le mostramos y que le gustó bastante. Lo que nos pide el cliente es lo siguiente:
 
-- Quieren conservar la interfaz de texto de la aplicación.
-- Quieren también tener una nueva interfaz de usuario gráfica para ejecutar la aplicación.
+- Que la aplicación no almacene los datos en ficheros y que lo haga en una base de datos creada para tal efecto.
 
-Tu tarea consiste en dotar a la aplicación de la tarea anterior de una interfaz gráfica de usuario, utilizando JavaFX. La interfaz se puede diseñar al gusto de cada un@, pero deberá utilizar los componentes más adecuados en cada caso. Cuanto más elaborada esté mayor será la calificación. Para ello debes emplear los diferentes tipos de controles, menús y contenedores que nos proporciona la API de JavaFX. Se pide al menos:
+Los datos de la BD, que es una BD MongoDB, son los siguientes:
 
-- Un menú que nos permita salir de la aplicación, o acceder a las diferentes opciones sobre aulas, profesores y reservas.
-- La gestión de aulas permitirá añadir una nueva, borrar una ya existente, mostrar todas las aulas, mostrar las reservas de un aula o consultar su disponibilidad.
-- La gestión de profesores permitirá añadir uno nuevo, borrar uno ya existente y mostrar todos los profesores. También permitirá mostrar las reservas de un profesor.
-- La gestión de reservas nos permitirá realizar una nueva reserva o anular una reserva dada. También permitirá mostrar todas las reservas.
+- Servidor: localhost o 127.0.01.
+- Puerto: 27017
+- BD: reservasaulas
+- Usuario: reservasaulas
+- Contraseña: reservasaulas-2022
 
-Por tanto, tu tarea va a consistir en completar los siguientes apartados:
+Tu tarea consiste en dotar a la aplicación de la tarea anterior de un nuevo modelo de datos que en vez de utilizar ficheros para almacenar los datos lo haga haciendo uso de una Base de Datos NoSQL. Se pide al menos:
 
-1. Debes realizar un fork del repositorio de tu tarea anterior en otro nuevo llamado ReservasAulas-v4. Dicho repositorio lo clonarás localmente y realizarás las diferentes modificaciones que se piden en esta tarea.
-2. Modifica el fichero de configuración de gradle para que incluya las librerías necesarias para poder trabajar correctamente con JavaFX. Crea un nuevo paquete para la vista gráfica. En principio la ventana principal sólo incluirá el menú adecuado. Cada fichero debe estar en la carpeta adecuada (bien sea un recurso -imagen o .fxml- o un fichero .java). Realiza el commit correspondiente.
-3. Mueve la interfaz textual al paquete adecuado y renombra la aplicación que utilizaba dicha interfaz textual. Realiza un commit.
-4. Crea un nuevo paquete para la vista gráfica. Crea una nueva aplicación que haga uso de dicha interfaz gráfica de usuario y que contenga el menú adecuado. Realiza un commit.
-5. Realiza la gestión de aulas tal y como se indica anteriormente. Realiza un commit.
-6. Realiza la gestión de profesores tal y como se indica anteriormente. Realiza un commit.
-7. Realiza la gestión de reservas tal y como se indica anteriormente. Realiza un commit.
-8. Al final debes tener dos aplicaciones que utilicen el mismo modelo, pero que una utilice la interfaz textual y otra la interfaz gráfica. Realiza un commit y sube los cambios a tu repositorio remoto.
+- Acomodar el proyecto para que gradle gestione la dependencia con el driver para java de MongoDB en su última vesión. Además deberás modificar el proyecto para que se puedan ejecutar todas las versiones: ficheros con IU textual, ficheros con IU gráfica, BD con IU textual y BD con IU gráfica.
+- Gestionar las aulas para que su persistencia se lleve a cabo por medio de dicha BD.
+- Gestionar los profesores para que su persistencia se lleve a cabo por medio de dicha BD.
+- Gestionar las reservas para que su persistencia se lleve a cabo por medio de dicha BD.
+
+Para ello debes realizar las siguientes acciones:
+
+1. Lo primero que debes hacer es crear un repositorio  en GitHub a partir de tu repositorio de la tarea anterior.
+2. Clona dicho repositorio localmente para empezar a modificarlo. Modifica el fichero README.md para que indique tus datos y los de esta tarea. Realiza tu primer commit.
+3. Realiza los cambios necesarios para que el proyecto pueda contener cuatro aplicaciones diferentes: ficheros con IU textual, ficheros con IU gráfica, BD con IU textual y BD con IU gráfica. Haz un commit.
+4. Haz que la gestión de aulas utilice la persistencia en la BD. Haz un commit.
+5. Haz que la gestión de profesores utilice la persistencia en la BD. Haz un commit.
+6. Haz que la gestión de reservas utilice la persistencia en la BD. Haz un commit.
 
 ###### Se valorará:
 
