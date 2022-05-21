@@ -29,20 +29,20 @@
             <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <Label text="Aula" GridPane.halignment="RIGHT" />
             <Label text="Correo Profesor" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Label text="Dia" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <ListView fx:id="lvAula" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <TextField fx:id="tfCorreo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dpDia" prefHeight="28.0" prefWidth="305.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <RadioButton fx:id="rbTramo" mnemonicParsing="false" text="Por Tramo" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <RadioButton fx:id="rbHora" mnemonicParsing="false" text="Por Hora" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="12.0" />
                </GridPane.margin>
             </RadioButton>
-            <DatePicker fx:id="dpDia" prefHeight="28.0" prefWidth="305.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="cbTramo" prefHeight="28.0" prefWidth="304.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="tfHora" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Aula" GridPane.halignment="RIGHT" />
-            <ListView fx:id="lvAula" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-            <TextField fx:id="tfCorreo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -17,9 +17,9 @@
             <Label text="Nombre:" GridPane.halignment="RIGHT" />
             <Label text="Telefono:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             <TextField fx:id="tfNombre" GridPane.columnIndex="1" />
+            <TextField fx:id="tfCorreo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="tfTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Correo:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <TextField fx:id="tfCorreo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="97.0" />

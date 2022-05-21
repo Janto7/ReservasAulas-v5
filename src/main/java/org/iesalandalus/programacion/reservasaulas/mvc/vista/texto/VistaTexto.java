@@ -1,6 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.vista.texto;
 
-import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
@@ -60,30 +59,13 @@ public class VistaTexto implements IVista {
 
 	public void borrarAula() {
 		Consola.mostrarCabecera("Borrar Aula");
-		Reserva reserva = null;
 
 		try {
 
 			Aula aula = Consola.leerAulaFicticia();
-			/*
-			 * No tiene sentido permitir borrar un aula que tiene asignada una o varias
-			 * reservas, primero habria que borrar la reserva, y después el aula. Si debemos
-			 * permitir borrar aquellas aulas aún teniendo reservas asociadas en el registro
-			 * del sistema, sean reservas ya se hayan consumado, y poder tener un registro
-			 * de ellas.
-			 */
-			List<Reserva> reservas = controlador.getReservasAula(aula);
-			for (Iterator<Reserva> it = reservas.iterator(); it.hasNext();) {
-				reserva = it.next();
-			}
 
-			if (reservas.size() > 0 && reserva.getPermanencia().getDia().isAfter(LocalDate.now())) {
-				System.out.println("No se puede borrar un aula con reservas en curso.");
-			} else {
-
-				controlador.borrarAula(aula);
-				System.out.println("Aula borrada correctamente.");
-			}
+			controlador.borrarAula(aula);
+			System.out.println("Aula borrada correctamente.");
 
 		} catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -138,29 +120,13 @@ public class VistaTexto implements IVista {
 
 	public void borrarProfesor() {
 		Consola.mostrarCabecera("Borrar Profesor");
-		Reserva reserva = null;
+
 		try {
 
 			Profesor profesor = Consola.leerProfesorFicticio();
-			/*
-			 * No tiene sentido permitir borrar un profesor que tiene asignada una o varias
-			 * reservas, primero habria que borrar la reserva, y después el profesor. Si
-			 * debemos permitir borrar aquellos profesores aún teniendo reservas asociadas
-			 * en el registro del sistema, sean reservas ya se hayan consumado, y poder
-			 * tener un registro de ellas.
-			 */
-			List<Reserva> reservas = controlador.getReservasProfesor(profesor);
-			for (Iterator<Reserva> it = reservas.iterator(); it.hasNext();) {
-				reserva = it.next();
-			}
 
-			if (reservas.size() > 0 && reserva.getPermanencia().getDia().isAfter(LocalDate.now())) {
-				System.out.println("No se puede borrar un profesor con reservas en curso.");
-			} else {
-
-				controlador.borrarProfesor(profesor);
-				System.out.println("Profesor borrado correctamente.");
-			}
+			controlador.borrarProfesor(profesor);
+			System.out.println("Profesor borrado correctamente.");
 
 		} catch (NullPointerException | OperationNotSupportedException | IllegalArgumentException e) {
 			System.out.println(e.getMessage());

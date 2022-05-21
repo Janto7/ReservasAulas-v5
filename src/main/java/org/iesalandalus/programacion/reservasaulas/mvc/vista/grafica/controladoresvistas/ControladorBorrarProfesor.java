@@ -1,12 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.mvc.vista.grafica.controladoresvistas;
 
-import java.time.LocalDate;
-import java.util.Iterator;
-import java.util.List;
-
 import org.iesalandalus.programacion.reservasaulas.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Profesor;
-import org.iesalandalus.programacion.reservasaulas.mvc.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.mvc.vista.grafica.utilidades.Dialogos;
 
 import javafx.fxml.FXML;
@@ -43,32 +38,14 @@ public class ControladorBorrarProfesor {
 	@FXML
 	private void borrarProfesor() {
 		Profesor profesor = null;
-		Reserva reserva = null;
+
 		try {
 			profesor = getProfesor();
 
-			/*
-			 * No tiene sentido permitir borrar un profesor que tiene asignada una o varias
-			 * reservas, primero habria que borrar la reserva, y después el profesor. Si
-			 * debemos permitir borrar aquellos profesores aún teniendo reservas asociadas
-			 * en el registro del sistema, sean reservas ya se hayan consumado, y poder
-			 * tener un registro de ellas.
-			 */
+			controladorMVC.borrarProfesor(profesor);
+			Stage propietario = ((Stage) btBorrar.getScene().getWindow());
+			Dialogos.mostrarDialogoInformacion(BORRAR_PROFESOR, "Profesor borrado satisfactoriamente", propietario);
 
-			List<Reserva> reservas = controladorMVC.getReservasProfesor(profesor);
-			for (Iterator<Reserva> it = reservas.iterator(); it.hasNext();) {
-				reserva = it.next();
-			}
-
-			if (reservas.size() > 0 && reserva.getPermanencia().getDia().isAfter(LocalDate.now())) {
-				Dialogos.mostrarDialogoError(BORRAR_PROFESOR,
-						"No se puede borrar un profesor con reservas en curso. Debe cancelar primero la reserva.");
-			} else {
-
-				controladorMVC.borrarProfesor(profesor);
-				Stage propietario = ((Stage) btBorrar.getScene().getWindow());
-				Dialogos.mostrarDialogoInformacion(BORRAR_PROFESOR, "Profesor borrado satisfactoriamente", propietario);
-			}
 		} catch (Exception e) {
 			Dialogos.mostrarDialogoError(BORRAR_PROFESOR, e.getMessage());
 		}
